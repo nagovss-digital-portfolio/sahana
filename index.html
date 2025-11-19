@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Sahana M - Business Analyst & Data Professional">
+    <title>Sahana M | Business Analyst Portfolio</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            /* New Modern Palette */
+            --primary: #6366f1;       /* Indigo */
+            --primary-dark: #4f46e5;
+            --accent: #8b5cf6;        /* Violet */
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            
+            --dark: #1e293b;          /* Slate 800 */
+            --text: #475569;          /* Slate 600 */
+            --text-light: #94a3b8;
+            
+            --bg-body: #f8fafc;
+            --white: #ffffff;
+            
+            /* Glassmorphism Variables */
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            --blur: blur(12px);
+            
+            --radius: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif; /* Switched to Outfit for a cleaner tech look */
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Abstract Background Blobs */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: floatShape 10s infinite alternate;
+        }
+        .shape-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: rgba(99, 102, 241, 0.2); }
+        .shape-2 { bottom: 10%; right: -5%; width: 400px; height: 400px; background: rgba(139, 92, 246, 0.2); }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: var(--glass-border);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .menu-icon {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-img-box {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            padding: 6px;
+            background: var(--white);
+            box-shadow: var(--glass-shadow);
+            margin-bottom: 2rem;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-img-box::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: var(--gradient);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #cbd5e1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-role {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            min-height: 1.6em;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            color: var(--text);
+            font-size: 1.15rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            background: var(--gradient);
+            color: var(--white);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.6);
+        }
+
+        /* --- SECTION STYLES --- */
+        section { padding: 7rem 8%; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title .line {
+            width: 80px;
+            height: 6px;
+            background: var(--gradient);
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        /* --- ABOUT --- */
+        .about-container {
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur);
+            padding: 3.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--glass-shadow);
+            border: var(--glass-border);
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .about-container p { font-size: 1.1rem; }
+
+        /* --- SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--glass-shadow);
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--gradient);
+        }
+
+        .skill-category h3 { 
+            margin-bottom: 1.5rem; 
+            color: var(--dark); 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-category h3 i { color: var(--primary); }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .tag {
+            background: #eff6ff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+            transition: 0.2s;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* --- EXPERIENCE TIMELINE --- */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: #e2e8f0;
+            top: 0;
+            bottom: 0;
+            left: 24px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 10px 10px 40px 60px;
+            position: relative;
+            width: 100%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 15.5px;
+            background-color: var(--white);
+            border: 5px solid var(--primary);
+            top: 18px;
+            border-radius: 50%;
+            z-index: 2;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover::before {
+            background: var(--accent);
+            border-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+        }
+
+        .timeline-content {
+            padding: 2rem;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--glass-shadow);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: translateX(10px);
+            border-color: var(--primary);
+        }
+
+        .t-date {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .t-role { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+        .t-company { color: var(--text-light); font-weight: 500; margin-bottom: 1rem; font-style: italic; }
+        .t-desc li { margin-bottom: 0.6rem; margin-left: 1.2rem; font-size: 1rem; color: var(--text); }
+
+        /* --- PROJECTS --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--glass-shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover { 
+            transform: translateY(-15px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .p-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Subtle pattern on header */
+        .p-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 10%, transparent 10%);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+        .p-header h3 { font-size: 1.3rem; z-index: 1; position: relative; display: flex; align-items: center; gap: 10px;}
+
+        .p-body { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;}
+        
+        .p-body ul { list-style: none; margin-top: 1rem; margin-bottom: 1.5rem;}
+        .p-body li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        
+        .p-body li::before {
+            content: '\f054'; /* FontAwesome chevron */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 3px;
+            font-size: 0.7rem;
+            color: var(--accent);
+        }
+
+        .tech-stack {
+            padding-top: 1rem;
+            border-top: 1px dashed #e2e8f0;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* --- RESEARCH & EDUCATION --- */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .edu-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--glass-shadow);
+            transition: var(--transition);
+        }
+        
+        .edu-card:hover { transform: scale(1.02); border-left-color: var(--accent); }
+        .edu-card h3 { margin-bottom: 0.5rem; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+        .edu-meta { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; display: block;}
+        
+        .research-section {
+            margin-top: 4rem;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            border-top: 5px solid var(--accent);
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+        }
+
+        /* --- CONTACT --- */
+        .contact-section {
+            background: linear-gradient(to bottom, var(--dark), #0f172a);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-info {
+            margin-top: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-card:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-5px); }
+        .contact-card a { color: var(--white); text-decoration: none; font-weight: 500; }
+        .contact-card i { color: var(--accent); font-size: 1.2rem; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #020617;
+            color: #64748b;
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* --- RESPONSIVE QUERIES --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0px;
+                top: 70px;
+                background: var(--white);
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                padding: 2rem 0;
+                gap: 1.5rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .nav-links.active { transform: translateX(0%); }
+            .menu-icon { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            
+            .timeline::before { left: 20px; }
+            .timeline-item { padding-left: 50px; padding-right: 0; }
+            .timeline-item::before { left: 11.5px; }
+            
+            .about-container { padding: 2rem; }
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes floatShape {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(10deg); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <nav>
+        <div class="logo">Sahana M.</div>
+        <div class="menu-icon" id="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+            <li><a href="#education" onclick="closeMenu()">Education</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-img-box">
+            <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Sahana M" class="hero-img">
+        </div>
+        <h1>Hi, I'm Sahana M</h1>
+        <div class="hero-role" id="typing-text"></div>
+        <p>Bridging the gap between technical engineering and business strategy. Delivering actionable insights that drive organizational success.</p>
+        <a href="#contact" class="btn">Get in Touch <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+    </section>
+
+    <section id="about">
+        <div class="section-title reveal">
+            <h2>About Me</h2>
+            <div class="line"></div>
+        </div>
+        <div class="about-container reveal">
+            <p>
+                I possess a unique ability to handle complex data structures while deeply understanding market trends. With a <strong>Bachelor of Engineering in Computer Science</strong> and an <strong>MBA in Business Analytics</strong>, I am a dual-threat professional.
+            </p>
+            <br>
+            <p>
+                My expertise spans <strong>Python, Tableau, SQL, and SPSS</strong>. Whether predicting real estate prices or analyzing consumer behavior for EdTech, I focus on detail-oriented analysis to solve real-world problems. I am eager to leverage these skills in a dynamic team environment.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-title reveal">
+            <h2>Technical Arsenal</h2>
+            <div class="line"></div>
+        </div>
+        <div class="skills-grid reveal">
+            
+            <div class="skill-category">
+                <h3><i class="fas fa-chart-pie"></i> Analysis & Visualization</h3>
+                <div class="skill-tags">
+                    <span class="tag">Tableau</span>
+                    <span class="tag">Power BI</span>
+                    <span class="tag">SPSS</span>
+                    <span class="tag">Adv. Excel</span>
+                    <span class="tag">ANOVA</span>
+                    <span class="tag">Regression</span>
+                    <span class="tag">Forecasting</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Programming & Data</h3>
+                <div class="skill-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">SQL / MySQL</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">Matplotlib</span>
+                    <span class="tag">ETL Pipelines</span>
+                    <span class="tag">R (Basics)</span>
+                    <span class="tag">Databricks</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-users"></i> Professional Skills</h3>
+                <div class="skill-tags">
+                    <span class="tag">Strategic Problem Solving</span>
+                    <span class="tag">Cross-functional Teamwork</span>
+                    <span class="tag">Adaptability</span>
+                    <span class="tag">Time Management</span>
+                    <span class="tag">Stakeholder Reporting</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="section-title reveal">
+            <h2>Professional Journey</h2>
+            <div class="line"></div>
+        </div>
+        <div class="timeline reveal">
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="t-date">Apr 2024 – Aug 2024</span>
+                    <div class="t-role">Market Analyst</div>
+                    <div class="t-company">DEVTOWN (EDTECH) | Bengaluru</div>
+                    <ul class="t-desc">
+                        <li>Analyzed market trends and consumer behavior to provide actionable insights for strategic decisions.</li>
+                        <li>Utilized Excel and Google Analytics to measure and report on the effectiveness of marketing initiatives.</li>
+                        <li>Conducted competitive analysis to support the development of new marketing strategies.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="t-date">Mar 2025 (Virtual)</span>
+                    <div class="t-role">Data Analytics Intern</div>
+                    <div class="t-company">DELOITTE</div>
+                    <ul class="t-desc">
+                        <li>Transformed raw data into meaningful visual insights using Tableau.</li>
+                        <li>Helped stakeholders understand performance metrics and uncover hidden trends efficiently.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="t-date">Feb 2025 (Virtual)</span>
+                    <div class="t-role">Data Visualization Intern</div>
+                    <div class="t-company">TATA</div>
+                    <ul class="t-desc">
+                        <li>Created dashboards that transformed complex datasets into clear actionable insights.</li>
+                        <li>Empowered the organization to identify patterns and opportunities effectively.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-title reveal">
+            <h2>Key Projects</h2>
+            <div class="line"></div>
+        </div>
+        <div class="project-grid reveal">
+
+            <div class="project-card">
+                <div class="p-header">
+                    <h3><i class="fas fa-spray-can"></i> &nbsp;Consumer Pref. (Perfume)</h3>
+                </div>
+                <div class="p-body">
+                    <div>
+                        <p style="margin-bottom:10px;"><strong>Goal:</strong> Identify customer buying behavior.</p>
+                        <ul>
+                            <li>Analyzed consumer priorities.</li>
+                            <li>Calculated statistics using <strong>ANOVA</strong> & <strong>Regression</strong>.</li>
+                            <li>Validated data using <strong>KMO</strong> & <strong>Bartlett’s test</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">SPSS • Statistical Analysis</div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="p-header">
+                    <h3><i class="fas fa-university"></i> &nbsp;Bank Account System</h3>
+                </div>
+                <div class="p-body">
+                    <div>
+                        <p style="margin-bottom:10px;"><strong>Goal:</strong> User-friendly transaction access.</p>
+                        <ul>
+                            <li>Tracked daily transactions & loan payments.</li>
+                            <li>Developed core banking operations.</li>
+                            <li>Managed individual account details securely.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">MySQL • DBMS</div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="p-header">
+                    <h3><i class="fas fa-comments"></i> &nbsp;Gossip Chimp</h3>
+                </div>
+                <div class="p-body">
+                    <div>
+                        <p style="margin-bottom:10px;"><strong>Goal:</strong> People-centric social web app.</p>
+                        <ul>
+                            <li>Created an ad-free/spam-free environment.</li>
+                            <li>Redefined social media to reduce negativity.</li>
+                            <li>Implemented robust architectural practices.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">Full Stack Web Dev</div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="p-header">
+                    <h3><i class="fas fa-user-tie"></i> &nbsp;Employee Mgmt System</h3>
+                </div>
+                <div class="p-body">
+                    <div>
+                        <p style="margin-bottom:10px;"><strong>Goal:</strong> Efficient workforce data storage.</p>
+                        <ul>
+                            <li>Implemented CRUD operations (Create, Read, Update, Delete).</li>
+                            <li>Tracked salaries, insurance, and leaves.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">Oracle SQL</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="section-title reveal">
+            <h2>Education & Research</h2>
+            <div class="line"></div>
+        </div>
+        
+        <div class="edu-grid reveal">
+            <div class="edu-card">
+                <h3><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> MBA</h3>
+                <span class="edu-meta">2022 - 2024 | PES University</span>
+                <p>Specialization in <strong>Business Analytics & Finance</strong></p>
+                <p style="margin-top: 10px;">GPA: <strong style="color: var(--primary);">7.56</strong></p>
+            </div>
+
+            <div class="edu-card">
+                <h3><i class="fas fa-laptop-code" style="color: var(--primary);"></i> B.E. Computer Science</h3>
+                <span class="edu-meta">2018 - 2022 | Dr. Ambedkar Institute of Tech</span>
+                <p>Foundation in Computer Science & Engineering</p>
+                <p style="margin-top: 10px;">GPA: <strong style="color: var(--primary);">7.89</strong></p>
+            </div>
+        </div>
+
+        <div class="reveal">
+            <div class="research-section">
+                <h3 style="margin-bottom: 1.5rem; color: var(--dark);">Published Research</h3>
+                <p style="margin-bottom: 15px; font-size: 1.05rem;">
+                    <i class="fas fa-scroll" style="color: var(--accent); margin-right: 8px;"></i> 
+                    An Analytical Study on the Price Prediction of Real Estate
+                </p>
+                <p style="font-size: 1.05rem;">
+                    <i class="fas fa-scroll" style="color: var(--accent); margin-right: 8px;"></i> 
+                    Fostering Innovation and Addressing Challenges in India’s EdTech Sector
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>Let's Work Together</h2>
+        <div class="line" style="background: var(--white);"></div>
+        <p style="margin-top: 1rem; opacity: 0.8;">Open to opportunities in Data Analytics and Business Strategy.</p>
+        
+        <div class="contact-info">
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:sahusahana284@gmail.com">sahusahana284@gmail.com</a>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Bengaluru, Karnataka</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sahana M. | Designed with <i class="fas fa-heart" style="color: #ef4444;"></i> & Code.</p>
+    </footer>
+
+    <script>
+        // 1. TYPING ANIMATION
+        const textElement = document.getElementById('typing-text');
+        const phrases = ["Business Analyst", "Data Enthusiast", "MBA Graduate"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = 100;
+
+            if (isDeleting) typeSpeed /= 2;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+        window.onload = type;
+
+        // 2. MOBILE MENU TOGGLE
+        const menuBtn = document.getElementById('menu-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        function closeMenu() {
+            navLinks.classList.remove('active');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+
+        // 3. SCROLL REVEAL ANIMATION
+        window.addEventListener('scroll', reveal);
+
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 150;
+
+                if (revealtop < windowheight - revealpoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
